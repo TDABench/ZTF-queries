@@ -20,7 +20,7 @@ export KOWALSKI_PASS="..."
 
 ### 2) Prepare an input CSV
 
-`query_train_data.py` expects a CSV with a column named **`ZTFID`**, e.g.:
+`alert_query.py` expects a CSV with a column named **`ZTFID`**, e.g.:
 
 ```csv
 ZTFID
@@ -34,7 +34,7 @@ This downloads raw alerts into `--raw-dir`, then builds the processed outputs in
 `--output-dir`:
 
 ```bash
-python query_train_data.py \
+python alert_query.py \
   --stage both \
   --input bts.csv \
   --raw-dir raw_alerts/ \
@@ -43,9 +43,9 @@ python query_train_data.py \
   --cutout-size 63
 ```
 
-## `query_train_data.py` (main entrypoint)
+## `alert_query.py` (main entrypoint)
 
-`query_train_data.py` is a two-stage pipeline:
+`alert_query.py` is a two-stage pipeline:
 
 - **Stage `query`**: query Kowalski for each ZTF objectId and save raw alert
   packets to disk as `.npy` (one file per object per programid).
@@ -78,7 +78,7 @@ The entire ZTF alert packet (including image cutouts) for all alerts from all so
 #### Download raw alerts only
 
 ```bash
-python query_train_data.py \
+python alert_query.py \
   --stage query \
   --input bts.csv \
   --raw-dir raw_alerts/
@@ -91,7 +91,7 @@ Outputs (per ZTFID, per programid):
 #### Process previously-downloaded raw alerts
 
 ```bash
-python query_train_data.py \
+python alert_query.py \
   --stage process \
   --input bts.csv \
   --raw-dir raw_alerts/ \
@@ -106,10 +106,10 @@ Outputs in `downloads/`:
 - **`triplets.npy`** (or `triplets<cutout-size>.npy`): stacked triplets array if
   `--include-cutouts` is enabled.
 
-## `ZTF_alert_utils.py` (supporting utilities)
+## `alert_utils.py` (supporting utilities)
 
-`ZTF_alert_utils.py` provides the helper functions used by
-`query_train_data.py`’s processing stage (and some extra utilities):
+`alert_utils.py` provides the helper functions used by
+`alert_query.py`’s processing stage (and some extra utilities):
 
 - **`make_triplet(alert, normalize=True)`**: unzip FITS cutouts from an alert
   packet and assemble a \(63,63,3\) science/template/difference triplet,

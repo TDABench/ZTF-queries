@@ -1,6 +1,6 @@
 """
 # =============================================================================
-# ZTF_alert_utils.py
+# alert_utils.py
 #
 # This script is originally from https://github.com/nabeelre/BTSbot.
 #

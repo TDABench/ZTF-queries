@@ -3,7 +3,7 @@ import numpy as np
 import argparse
 import os
 
-from ZTF_alert_utils import (make_triplet, prep_alerts, crop_triplets)
+from alert_utils import (make_triplet, prep_alerts, crop_triplets)
 
 KOWALSKI_USER = os.environ.get('KOWALSKI_USER')
 KOWALSKI_PASS = os.environ.get('KOWALSKI_PASS')
