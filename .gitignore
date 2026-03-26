@@ -208,3 +208,6 @@ __marimo__/
 
 *.csv
 *.txt
+Milliquas/
+VarStars/
+.DS_Store
